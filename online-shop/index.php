@@ -1,6 +1,7 @@
 <?php
 require('./layouts/header.php');
-require('./logic/stars.php');
+//require('./logic/stars.php');
+// include('./logic/stars.php');
 $categories = [
     ['id' => 1, 'name' => 'cat1', 'image' => 'img/cat-1.jpg'],
     ['id' => 2, 'name' => 'cat2', 'image' => 'img/cat-2.jpg'],
@@ -8,14 +9,14 @@ $categories = [
     ['id' => 4, 'name' => 'cat4', 'image' => 'img/cat-4.jpg'],
 ];
 $products = [
-    ['id' => 1, 'name' => 'product-1', 'price' => 123, 'discount' => 0.1, 'rating' => 3, 'is_featured' => true, 'rating_count' => 1, 'is_recent' => false, 'image' => 'img/product-1.jpg'],
-    ['id' => 2, 'name' => 'product-2', 'price' => 100, 'discount' => 0.1, 'rating' => 4.5, 'is_featured' => true, 'rating_count' => 1, 'is_recent' => false, 'image' => 'img/product-2.jpg'],
-    ['id' => 3, 'name' => 'product-3', 'price' => 200, 'discount' => 0.1, 'rating' => 5, 'is_featured' => false, 'rating_count' => 1, 'is_recent' => true, 'image' => 'img/product-3.jpg'],
-    ['id' => 4, 'name' => 'product-4', 'price' => 500, 'discount' => 0.1, 'rating' => 2, 'is_featured' => true, 'rating_count' => 1, 'is_recent' => false, 'image' => 'img/product-4.jpg'],
-    ['id' => 5, 'name' => 'product-5', 'price' => 100, 'discount' => 0.1, 'rating' => 3.5, 'is_featured' => false, 'rating_count' => 1, 'is_recent' => true, 'image' => 'img/product-5.jpg'],
-    ['id' => 6, 'name' => 'product-6', 'price' => 300, 'discount' => 0.1, 'rating' => 5, 'is_featured' => false, 'rating_count' => 1, 'is_recent' => true, 'image' => 'img/product-6.jpg'],
-    ['id' => 7, 'name' => 'product-7', 'price' => 160, 'discount' => 0.1, 'rating' => 2, 'is_featured' => false, 'rating_count' => 1, 'is_recent' => true, 'image' => 'img/product-7.jpg'],
-    ['id' => 8, 'name' => 'product-8', 'price' => 400, 'discount' => 0.1, 'rating' => 5, 'is_featured' => true, 'rating_count' => 1, 'is_recent' => false, 'image' => 'img/product-8.jpg'],
+    ['id' => 1, 'name' => 'product-1', 'price' => 123, 'discount' => 0.1, 'rating' => 2.5, 'is_featured' => true, 'rating_count' => 100, 'is_recent' => false, 'image' => 'img/product-1.jpg'],
+    ['id' => 2, 'name' => 'product-2', 'price' => 100, 'discount' => 0.1, 'rating' => 4.5, 'is_featured' => true, 'rating_count' => 100, 'is_recent' => false, 'image' => 'img/product-2.jpg'],
+    ['id' => 3, 'name' => 'product-3', 'price' => 200, 'discount' => 0.1, 'rating' => 5, 'is_featured' => false, 'rating_count' => 100, 'is_recent' => true, 'image' => 'img/product-3.jpg'],
+    ['id' => 4, 'name' => 'product-4', 'price' => 500, 'discount' => 0.1, 'rating' => 3.5, 'is_featured' => true, 'rating_count' => 100, 'is_recent' => false, 'image' => 'img/product-4.jpg'],
+    ['id' => 5, 'name' => 'product-5', 'price' => 100, 'discount' => 0.1, 'rating' => 4.5, 'is_featured' => false, 'rating_count' => 100, 'is_recent' => true, 'image' => 'img/product-5.jpg'],
+    ['id' => 6, 'name' => 'product-6', 'price' => 300, 'discount' => 0.1, 'rating' => 3.5, 'is_featured' => false, 'rating_count' => 100, 'is_recent' => true, 'image' => 'img/product-6.jpg'],
+    ['id' => 7, 'name' => 'product-7', 'price' => 160, 'discount' => 0.1, 'rating' => 2.5, 'is_featured' => false, 'rating_count' => 100, 'is_recent' => true, 'image' => 'img/product-7.jpg'],
+    ['id' => 8, 'name' => 'product-8', 'price' => 400, 'discount' => 0.1, 'rating' => 3.5, 'is_featured' => true, 'rating_count' => 100, 'is_recent' => false, 'image' => 'img/product-8.jpg'],
 
 ];
 ?>
@@ -202,13 +203,21 @@ $products = [
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
                                 <?php
-                                for ($x = 0; $x < $product['rating']; $x++) {
+                                    // require __DIR__ . './logic/stars.php'
+                                $fullStars = floor($product['rating']);
+                                $halfStars = $product['rating'] - $fullStars;
+                                $emptyStars = 4-$fullStars;
+                                for ($i = 0; $i < $fullStars; $i++)
+                                    echo '<small class="fa fa-star text-primary mr-1"></small>';
+                                
+                                 if($halfStars==0.5) {
+                                    echo '<small class="fa fa-star-half-alt text-primary mr-1"></small>';
+                                }
+                                if ($emptyStars) {
+                                    for ($z = 0; $z < $emptyStars; $z++)
+                                     echo '<small class="far fa-star text-primary mr-1"></small>';
+                                }
                                 ?>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <?php
-                                    }
-                                     ?>
-
                                 <small>(<?= $product['rating_count'] ?>)</small>
                             </div>
                         </div>
@@ -278,10 +287,18 @@ $products = [
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
                                 <?php
-                                for($x=0; $x<$product['rating']; $x++){
-                                ?>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <?php
+                                $fullStars = floor($product['rating']);
+                                $halfStars = $product['rating'] - $fullStars;
+                                $emptyStars = 4-$fullStars;
+                                for ($i = 0; $i < $fullStars; $i++)
+                                    echo '<small class="fa fa-star text-primary mr-1"></small>';
+                                
+                                 if($halfStars==0.5) {
+                                    echo '<small class="fa fa-star-half-alt text-primary mr-1"></small>';
+                                }
+                                if ($emptyStars) {
+                                    for ($z = 0; $z < $emptyStars; $z++)
+                                     echo '<small class="far fa-star text-primary mr-1"></small>';
                                 }
                                 ?>
                                 <small>(<?= $product['rating_count']?>)</small>
