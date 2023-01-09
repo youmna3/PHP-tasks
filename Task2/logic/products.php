@@ -1,4 +1,5 @@
 <?php
+
 require_once(BASE_PATH . 'dal/dal.php');
 
 function getProducts()
@@ -41,7 +42,7 @@ function displayProducts($product)
                 <small class="fa fa-star text-primary mr-1"></small>
                 <small class="fa fa-star text-primary mr-1"></small>
                 <small class="fa fa-star text-primary mr-1"></small>
-                <small>('. $product['rating_count']. ')</small>
+                <small>(' . $product['rating_count'] . ')</small>
             </div>
         </div>
     </div>
