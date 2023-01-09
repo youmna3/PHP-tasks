@@ -3,6 +3,11 @@
 define('BASE_ADMIN_URL', '/online-shop/admin/');
 define('BASE_PATH', '../');
 require_once('../logic/categories.php');
+require_once('../logic/size.php');
+require_once('../logic/colors.php');
+$categories = getCategories();
+$sizes = getSizes();
+$colors = getColors();
 ?>
 
 <!DOCTYPE html>
@@ -15,25 +20,73 @@ require_once('../logic/categories.php');
     <title>admin add product</title>
     <link href="../css/style.css" rel="stylesheet" />
 </head>
-<form>
-    <div class="form-group">
-        <label for="exampleInputEmail1">Name</label>
-        <input type="name" class="form-control" placeholder="Product Name">
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
 
 <body>
-    <form>
-    </form>
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <form class="row" method="post" enctype="multipart/form-data">
+                            <div class="form-group col-6">
+                                <label>Name</label>
+                                <input class="form-control" name="name" placeholder="Product Name">
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Description</label>
+                                <textarea class="form-control" name="description" placeholder="Description"></textarea>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Image</label>
+                                <input name="image" type="file" />
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Price</label>
+                                <input class="form-control" name="price" type="number" min="0" />
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Category</label>
+                                <select name="category_id" class="form-control">
+                                    <?php
+                                    foreach ($categories as $category) {
+                                        echo '<option value="' . $category['id'] . '"' . (isset($values['category_id']) && $values['category_id'] == $category['id'] ? 'selected' : '') . '>' . $category['name'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Size</label>
+                                <select name="category_id" class="form-control">
+                                    <?php
+                                    foreach ($sizes as $size) {
+                                        echo '<option value="' . $size['id'] . '"' . (isset($values['size_id']) && $values['size_id'] == $size['id'] ? 'selected' : '') . '>' . $size['name'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Size</label>
+                                <select name="category_id" class="form-control">
+                                    <?php
+                                    foreach ($colors as $color) {
+                                        echo '<option value="' . $color['id'] . '"' . (isset($values['color']) && $values['color_id'] == $color['id'] ? 'selected' : '') . '>' . $color['name'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group form-check form-group col-6">
+                                <input type="checkbox">
+                                <label class="form-check-label" for="exampleCheck1">Recent</label>
+                                <input type="checkbox">
+                                <label class="form-check-label" for="exampleCheck1">Featured</label>
+                            </div>
+                            <a href="products.php" class="btn btn-success">ADD</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </body>
 
 </html>
