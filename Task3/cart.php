@@ -44,7 +44,7 @@ require_once('./layouts/header.php');
                                     </div>
                                     <input type="text"
                                         class="quantityVal form-control form-control-sm bg-secondary border-0 text-center"
-                                        value="100" />
+                                        value="<?= $cart['quantity'] ?>" />
                                     <div class="input-group-btn">
                                         <button type="button" class="incBtn btn btn-sm btn-primary btn-plus">
                                             <i class="fa fa-plus"></i>
@@ -52,7 +52,9 @@ require_once('./layouts/header.php');
                                     </div>
                                 </div>
                             </td>
-                            <td class="align-middle">$100</td>
+                            <td class="align-middle">
+                                <?= $catline['price'] * $cart['quantity'] ?>
+                            </td>
                             <td class="align-middle">
                                 <button class="btn btn-sm btn-danger" type="button">
                                     <i class="fa fa-times"></i>
