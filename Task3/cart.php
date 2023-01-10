@@ -1,7 +1,7 @@
 <?php
 define('BASE_PATH', './');
 require_once('./logic/cart.php');
-$cart = getCart();
+$products = getCart();
 var_dump(getCart());
 require_once('./layouts/header.php');
 // var_dump(getCart());
@@ -23,42 +23,45 @@ require_once('./layouts/header.php');
                 </thead>
                 <tbody class="align-middle" id="products">
                     <?php
-                    foreach ($cart as $cart) {
-                        $catline = $cart['product']
-                            ?>
+                    foreach ($products as $product) {
+
+                        ?>
 
                         <tr>
                             <td class="align-middle">
-                                <img src="<?= $catline['image_url'] ?>" alt="" style="width: 50px" />
-                                <?= $catline['name'] ?>
+                                <img src="<?= $product['product']['image_url'] ?>" alt="" style="width: 50px" />
+                                <?= $product['product']['name'] ?>
                             </td>
                             <td class="align-middle">
-                                <?= $catline['price'] ?>
+                                <?= $product['product']['price'] * (1 - $product['product']['discount']) ?>
                             </td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px">
                                     <div class="input-group-btn">
-                                        <button type="button" class="decBtn btn btn-sm btn-primary btn-minus">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
+                                        <a href="dec.php?id=<?= $product['product']['id'] ?>">
+                                            <button type="button" class="decBtn btn btn-sm btn-primary btn-minus">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
                                     </div>
                                     <input type="text"
                                         class="quantityVal form-control form-control-sm bg-secondary border-0 text-center"
-                                        value="<?= $cart['quantity'] ?>" />
+                                        value="<?= $product['quantity'] ?>" />
                                     <div class="input-group-btn">
-                                        <button type="button" class="incBtn btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
+                                        <a href="addproduct.php?id=<?= $product['product']['id'] ?>">
+                                            <button type="button" class="incBtn btn btn-sm btn-primary btn-plus">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
                                     </div>
                                 </div>
                             </td>
                             <td class="align-middle">
-                                <?= $catline['price'] * $cart['quantity'] ?>
+                                <?= $product['product']['price'] * (1 - $product['product']['discount']) * $product['quantity'] ?>
                             </td>
                             <td class="align-middle">
-                                <button class="btn btn-sm btn-danger" type="button">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                                <a href="delete.php?id=<?= $product['product']['id'] ?>">
+                                    <button class="btn btn-sm btn-danger" type="button">
+                                        <i class="fa fa-times"></i>
+                                    </button>
                             </td>
                         </tr>
                     <?php
