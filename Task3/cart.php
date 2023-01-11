@@ -24,9 +24,7 @@ require_once('./layouts/header.php');
                 <tbody class="align-middle" id="products">
                     <?php
                     foreach ($products as $product) {
-
                         ?>
-
                         <tr>
                             <td class="align-middle">
                                 <img src="<?= $product['product']['image_url'] ?>" alt="" style="width: 50px" />
@@ -86,17 +84,23 @@ require_once('./layouts/header.php');
                 <div class="border-bottom pb-2">
                     <div class="d-flex justify-content-between mb-3">
                         <h6>Subtotal</h6>
-                        <h6 id="sub-total"></h6>
+                        <h6 id="sub-total">
+                            $<?= getSubTotal() ?>
+                        </h6>
                     </div>
                     <div class="d-flex justify-content-between">
                         <h6 class="font-weight-medium">Shipping</h6>
-                        <h6 class="font-weight-medium" id="shipping"></h6>
+                        <h6 class="font-weight-medium" id="shipping">
+                            $<?= getShipping() ?>
+                        </h6>
                     </div>
                 </div>
                 <div class="pt-2">
                     <div class="d-flex justify-content-between mt-2">
                         <h5>Total</h5>
-                        <h5 id="total"></h5>
+                        <h5 id="total">
+                            $<?= getTotal() ?>
+                        </h5>
                     </div>
                     <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">
                         Proceed To Checkout

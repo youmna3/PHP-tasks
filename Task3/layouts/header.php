@@ -130,9 +130,11 @@ $categories = getCategories();
                     id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999">
                     <div class="navbar-nav w-100">
                         <?php
-                        foreach ($categories as  $cat) {
-                        ?>
-                        <a href="<?='/shop.php?category_id=' . $cat['id'] ?>" class="nav-item nav-link"><?= $cat['name'] ?></a>
+                        foreach ($categories as $cat) {
+                            ?>
+                            <a href="<?='/shop.php?category_id=' . $cat['id'] ?>" class="nav-item nav-link">
+                                <?= $cat['name'] ?>
+                            </a>
                         <?php
                         }
                         ?>
@@ -157,7 +159,7 @@ $categories = getCategories();
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i
                                         class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
+                                    <a href="cart.php" class="dropdown-item">Shopping Cart</a>
                                     <a href="checkout.php" class="dropdown-item">Checkout</a>
                                 </div>
                             </div>

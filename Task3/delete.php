@@ -1,4 +1,5 @@
 <?php
+
 define('BASE_PATH', './');
 require_once('./logic/products.php');
 require_once('./logic/cart.php');
@@ -7,9 +8,7 @@ if (isset($_GET['id'])) {
     if ($product) {
         remove($product);
     }
-
 }
-
-
 header('Location:cart.php');
+
 ?>

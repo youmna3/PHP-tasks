@@ -35,6 +35,29 @@ function remove($product)
     }
     $_SESSION['cart'] = $cart;
 }
+function getSubTotal()
+{
+    $cart = getCart();
+    $subtotal = 0;
+    for ($i = 0; $i < count($cart); $i++) {
+        $subtotal += $cart[$i]['quantity'] * ($cart[$i]['product']['price'] * (1 - $cart[$i]['product']['discount']));
+    }
+    return $subtotal;
+}
+
+function getShipping()
+{
+    $cart = getCart();
+    $shipping = 0;
+    for ($i = 0; $i < count($cart); $i++) {
+        $shipping += $cart[$i]['quantity'] * 10;
+    }
+    return $shipping;
+}
+function getTotal()
+{
+    return getShipping() + getSubTotal();
+}
 function getCart()
 {
     if (session_status() === PHP_SESSION_NONE)
