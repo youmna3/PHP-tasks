@@ -19,7 +19,7 @@ function decQun($product)
 {
     $cart = getCart();
     for ($i = 0; $i < count($cart); $i++) {
-        if ($cart[$i]['product']['id'] === $product['id']) {
+        if ($cart[$i]['product']['id'] === $product['id'] && $cart[$i]['quantity'] > 1) {
             $cart[$i]['quantity']--;
         }
     }
