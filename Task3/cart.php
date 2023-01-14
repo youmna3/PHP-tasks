@@ -2,7 +2,7 @@
 define('BASE_PATH', './');
 require_once('./logic/cart.php');
 $products = getCart();
-//var_dump(getCart());
+var_dump(getCart());
 require_once('./layouts/header.php');
 
 

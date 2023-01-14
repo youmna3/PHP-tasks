@@ -30,7 +30,9 @@ function remove($product)
     $cart = getCart();
     for ($i = 0; $i < count($cart); $i++) {
         if ($cart[$i]['product']['id'] === $product['id']) {
-            unset($cart[$i]);
+            array_splice($cart, $i, 1);
+            // unset($cart);
+            // array_values($cart);
         }
     }
     $_SESSION['cart'] = $cart;
