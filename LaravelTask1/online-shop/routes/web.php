@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/shop', [HomeController::class, 'shop']);
