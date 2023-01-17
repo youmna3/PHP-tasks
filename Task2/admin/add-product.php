@@ -80,6 +80,7 @@ $colors = getColors();
                                 <input type="checkbox">
                                 <label class="form-check-label" for="exampleCheck1">Featured</label>
                             </div>
+
                             <a href="products.php" class="btn btn-success">ADD</a>
                         </form>
                     </div>
