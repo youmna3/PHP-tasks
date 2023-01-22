@@ -2,8 +2,9 @@
 
 
 use App\Http\Controllers\AdminController;
-//use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,5 +23,16 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/shop', [HomeController::class, 'shop']);
-Route::get('/admin', [AdminController::class, 'admin']);
-Route::get('/admin/categories', [AdminController::class, 'categories']);
+//Route::get('/admin', [AdminController::class, 'admin']);
+Route::prefix('admin')->group(function () {
+    Route::get('', [AdminController::class, 'admin']);
+    Route::get('categories', [CategoriesController::class, 'index']);
+    Route::post('categories', [CategoriesController::class, 'store'])->name('admin.categories');
+    Route::get('categories/create', [CategoriesController::class, 'create']);
+    Route::get('categories/{id}/edit', [CategoriesController::class, 'edit']);
+    Route::put('categories/{id}', [CategoriesController::class, 'update']);
+    Route::delete('categories/{id}', [CategoriesController::class, 'destroy']);
+    Route::resource('products', ProductsController::class);
+
+});
+//Route::resource('admin.products', ProductsController::class);
