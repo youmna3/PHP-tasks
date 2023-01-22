@@ -11,7 +11,7 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <label>Product Image</label>
-            <input name="image" type="file" value="{{ old('name', $product->name) }}" /><br />
+            <input name="image" type="file" value="{{ old('image', $product->image) }}" /><br />
             @error('image')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -32,13 +32,14 @@
             </div>
             <div>
                 <label>Discount</label>
-                <input class="form-control" name="discount" type="number" step="0.01" />
+                <input class="form-control" name="discount" type="number" step="0.01"
+                    value="{{ old('discount', $product->discount) }}" />
             </div>
             <div class="form-group form-check form-group col-6">
-                <input type="checkbox">
-                <label class="form-check-label" for="exampleCheck1">Recent</label>
-                <input type="checkbox">
-                <label class="form-check-label" for="exampleCheck1">Featured</label>
+                <label>Featured</label>
+                <input type="checkbox" name='is_featured'>
+                <label>Recent</label>
+                <input type="checkbox" name='is_recent'>
             </div>
             <select class="form-control" name="size_id">
                 <option>Size</option>

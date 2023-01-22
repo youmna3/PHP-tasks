@@ -41,6 +41,9 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('products', function (Blueprint $table) {
+            $table->dropColumn('is_recent');
+            $table->dropColumn('is_featured');
+        });
     }
 };

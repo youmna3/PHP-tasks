@@ -34,10 +34,10 @@
                 <input class="form-control" name="discount" type="number" value="{{ old('discount') }}" step="0.01" />
             </div>
             <div class="form-group form-check form-group col-6">
-                <input type="checkbox">
-                <label class="form-check-label" for="exampleCheck1">Recent</label>
-                <input type="checkbox">
-                <label class="form-check-label" for="exampleCheck1">Featured</label>
+                <label>Featured</label>
+                <input type="checkbox" name='is_featured'>
+                <label>Recent</label>
+                <input type="checkbox" name='is_recent'>
             </div>
             <select class="form-control" name="size_id">
                 <option>Size</option>

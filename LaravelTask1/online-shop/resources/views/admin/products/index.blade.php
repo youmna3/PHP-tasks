@@ -19,8 +19,9 @@
                 <th>Image</th>
                 <th>Color</th>
                 <th>Size</th>
-                <th>DELETE</th>
-                <th>EDIT</th>
+                <th>Recent</th>
+                <th>Featured</th>
+                <th colspan="3">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +36,9 @@
                     <td><img src="{{ asset('storage/' . $product->image) }}"width="100px" /></td>
                     <td>{{ $product['color']['name'] }}</td>
                     <td>{{ $product['size']['name'] }}</td>
+                    <td>{{ $product['is_recent'] }}</td>
+                    <td>{{ $product['is_featured'] }}</td>
+                    <td><a href="{{ url('admin/products/' . $product['id']) }}"class="btn btn-success">Show</a></td>
                     <td><a href="{{ url('admin/products/' . $product['id'] . '/edit') }}" class="btn btn-success">EDIT</a>
                     </td>
                     <td>

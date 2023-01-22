@@ -49,6 +49,8 @@ class ProductsController extends Controller
         $product = new Product;
         $product->fill($request->post());
         $product['image'] = $imageUrl;
+        $product['is_recent'] = isset($request['is_recent']) ? 1 : 0;
+        $product['is_featured'] = isset($request['is_featured']) ? 1 : 0;
         $product->save();
 
         return redirect()->route('products.index');
@@ -63,6 +65,8 @@ class ProductsController extends Controller
     public function show($id)
     {
         //
+        $product = Product::findOrFail($id);
+        return view('admin.products.show', compact('product'));
 
     }
 
@@ -97,6 +101,8 @@ class ProductsController extends Controller
         $imageUrl = $request->file('image')->store('products', ['disk' => 'public']);
         $product->fill($request->post());
         $product['image'] = $imageUrl;
+        $product['is_recent'] = isset($request['is_recent']) ? 1 : 0;
+        $product['is_featured'] = isset($request['is_featured']) ? 1 : 0;
         $product->save();
 
         return redirect()->route('products.index');
