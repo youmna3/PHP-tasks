@@ -12,13 +12,11 @@
     <link href="{{ url('img/favicon.ico') }}" rel="icon" />
 
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="{{ url('https://fonts.gstatic.com') }}" />
-    <link href="{{ url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap') }}"
-        rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
 
     <!-- Font Awesome -->
-    <link href="{{ url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css') }}"
-        rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
 
     <!-- Libraries Stylesheet -->
     <link href="{{ url('lib/animate/animate.min.css') }}" rel="stylesheet" />
@@ -81,7 +79,7 @@
                     <a href="" class="btn px-0 ml-2">
                         <i class="fas fa-shopping-cart text-dark"></i>
                         <span class="badge text-dark border border-dark rounded-circle"
-                            style="padding-bottom: 2px">0</span>
+                            style="padding-bottom: 2px">{{ count(session()->get('ids', [])) }}</span>
                     </a>
                 </div>
             </div>
@@ -94,9 +92,10 @@
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
-                <form action="">
+                <form action="{{ url('/shop') }}">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products" />
+                        <input type="text" class="form-control" name="keywords" placeholder="Search for products"
+                            value="{{ request()->get('keywords') }}" />
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
@@ -127,24 +126,10 @@
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
                     id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999">
                     <div class="navbar-nav w-100">
-                        <div class="nav-item dropdown dropright">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i
-                                    class="fa fa-angle-right float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                <a href="" class="dropdown-item">Men's Dresses</a>
-                                <a href="" class="dropdown-item">Women's Dresses</a>
-                                <a href="" class="dropdown-item">Baby's Dresses</a>
-                            </div>
-                        </div>
-                        <a href="" class="nav-item nav-link">Shirts</a>
-                        <a href="" class="nav-item nav-link">Jeans</a>
-                        <a href="" class="nav-item nav-link">Swimwear</a>
-                        <a href="" class="nav-item nav-link">Sleepwear</a>
-                        <a href="" class="nav-item nav-link">Sportswear</a>
-                        <a href="" class="nav-item nav-link">Jumpsuits</a>
-                        <a href="" class="nav-item nav-link">Blazers</a>
-                        <a href="" class="nav-item nav-link">Jackets</a>
-                        <a href="" class="nav-item nav-link">Shoes</a>
+                        @foreach ($categories as $category)
+                            <a href="{{ url('/shop?category_id=' . $category['id']) }}"
+                                class="nav-item nav-link">{{ $category['name'] }}</a>
+                        @endforeach
                     </div>
                 </nav>
             </div>
@@ -162,15 +147,8 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{{ url('') }}" class="nav-item nav-link active">Home</a>
                             <a href="{{ url('shop') }}" class="nav-item nav-link">Shop</a>
-                            <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i
-                                        class="fa fa-angle-down mt-1"></i></a>
-                                <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="{{ url('cart') }}" class="dropdown-item">Shopping Cart</a>
-                                    <a href="{{ url('checkout') }}" class="dropdown-item">Checkout</a>
-                                </div>
-                            </div>
+                            <a href="{{ url('cart') }}" class="nav-item nav-link">Cart</a>
+                            <a href="{{ url('checkout') }}" class="nav-item nav-link">Checkout</a>
                             <a href="{{ url('contact') }}" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
@@ -182,7 +160,7 @@
                             <a href="" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle"
-                                    style="padding-bottom: 2px">0</span>
+                                    style="padding-bottom: 2px">{{ count(session()->get('ids', [])) }}</span>
                             </a>
                         </div>
                     </div>
@@ -191,7 +169,9 @@
         </div>
     </div>
     <!-- Navbar End -->
+
     @yield('content')
+
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
         <div class="row px-xl-5 pt-5">
@@ -299,11 +279,13 @@
 
     <!-- Contact Javascript File -->
     <script src="{{ url('mail/jqBootstrapValidation.min.js') }}"></script>
-    <script src="mail/contact.js"></script>
+    <script src="{{ url('mail/contact.js') }}"></script>
 
     <!-- Template Javascript -->
     <script src="{{ url('js/main.js') }}"></script>
     <script src="{{ url('js/home.js') }}"></script>
+
+    @yield('scripts')
 </body>
 
 </html>

@@ -129,11 +129,12 @@
                     <a class="text-decoration-none" href="{{ url('shop') }}">
                         <div class="cat-item d-flex align-items-center mb-4">
                             <div class="overflow-hidden" style="width: 100px; height: 100px">
-                                <img class="img-fluid" src="{{ asset('storage/' . $category->image) }}" alt="" />
+                                <img class="img-fluid" src="{{ asset('storage/' . $category['image']) }}"
+                                    alt="" />
                             </div>
                             <div class="flex-fill pl-3">
                                 <h6>{{ $category['name'] }}</h6>
-                                <small class="text-body">{{ $category['product'] }}</small>
+                                <small class="text-body">100 Products</small>
                             </div>
                         </div>
                     </a>
@@ -157,8 +158,7 @@
                                 <img class="img-fluid w-100" src="{{ asset('storage/' . $product['image']) }}"
                                     alt="" />
                                 <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square"
-                                        onclick="addProductToSession({{ $product['id'] }})"><i
+                                    <a class="btn btn-outline-dark btn-square" href="#"><i
                                             class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href="#"><i
                                             class="far fa-heart"></i></a>
@@ -169,11 +169,10 @@
                                 </div>
                             </div>
                             <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate"
-                                    href="">{{ $product['name'] }}</a>
+                                <a class="h6 text-decoration-none text-truncate" href="">{{ $product['name'] }}</a>
                                 <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>{{ $product->getPrice() }}</h5>
-                                    <h6 class="text-muted ml-2"><del>{{ $product['price'] }}</del></h6>
+                                    <h5>${{ $product->getPrice() }}</h5>
+                                    <h6 class="text-muted ml-2"><del>${{ $product['price'] }}</del></h6>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center mb-1">
                                     <small class="fa fa-star text-primary mr-1"></small>
@@ -247,8 +246,8 @@
                                 <a class="h6 text-decoration-none text-truncate"
                                     href="">{{ $product['name'] }}</a>
                                 <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>{{ $product->getPrice() }}</h5>
-                                    <h6 class="text-muted ml-2"><del>{{ $product['price'] }}</del></h6>
+                                    <h5>${{ $product->getPrice() }}</h5>
+                                    <h6 class="text-muted ml-2"><del>${{ $product['price'] }}</del></h6>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center mb-1">
                                     <small class="fa fa-star text-primary mr-1"></small>
