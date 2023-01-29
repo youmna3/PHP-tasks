@@ -71,6 +71,9 @@ class HomeController extends Controller
         foreach($ids as $id=>$quantity){
             $product= Product::findOrFail($id);
             $product['quantity'] = $quantity;
+            $subTotal += $product['quantity'] * ($product['price'] * (1 - $product['discount']));
+            $shipping += $quantity *10;
+            $total = $subTotal +$shipping;
             array_push($products, $product);
         }
         return view('cart',compact('products','shipping','subTotal','total'));
