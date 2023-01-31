@@ -36,12 +36,12 @@ class CartController extends Controller
             Session::put('ids', $ids);
             return response()->json('quntity increased');
         }
-        //return abort(404);
+        return abort(404);
     }
 
     function decQuan(Request $request)
     {
-        dd(session());
+
         if ($request->has('id')) {
             $ids = Session::get('ids', []);
 
@@ -54,7 +54,7 @@ class CartController extends Controller
 
             return response()->json('quntity dec');
         }
-        //return abort(404);
+        return abort(404);
     }
     /*
     function remove(Request $request)
@@ -74,15 +74,18 @@ class CartController extends Controller
 
     function delete(Request $request)
     {
-        $ids = Session::get('ids', []);
-        $newCartLines = [];
-        foreach ($ids as $id) {
-            if ($id != $request->get('id')) {
-                array_push($newCartLines, $id);
+        if ($request->has('id')) {
+            $ids = Session::get('ids', []);
+            $newCartLines = [];
+            foreach ($ids as $id) {
+                if ($id != $request->get('id')) {
+                    array_push($newCartLines, $id);
+                }
             }
+            Session::put('ids', $newCartLines);
+            return response()->json('delet product');
         }
-        Session::put('ids', $newCartLines);
-        return response()->json('delet product');
+        return abort(404);
 
     }
 
