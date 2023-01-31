@@ -9,6 +9,7 @@ use App\Models\color;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+
 class HomeController extends Controller
 {
     //
@@ -60,24 +61,24 @@ class HomeController extends Controller
     }
 
 
-   public static function cart()
-    {     
-        $products = [];
-        $shipping=0;
-        $subTotal=0;
-        $total=0;
-        $ids = session()->get('ids', []);
-        $ids = array_count_values($ids);
-        foreach($ids as $id=>$quantity){
-            $product= Product::findOrFail($id);
-            $product['quantity'] = $quantity;
-            $subTotal += $product['quantity'] * ($product['price'] * (1 - $product['discount']));
-            $shipping += $quantity *10;
-            $total = $subTotal +$shipping;
-            array_push($products, $product);
-        }
-        return view('cart',compact('products','shipping','subTotal','total'));
-    }
+    //  function cart()
+//     {     
+//         $products = [];
+//         $shipping=0;
+//         $subTotal=0;
+//         $total=0;
+//         $ids = session()->get('ids', []);
+//         $ids = array_count_values($ids);
+//         foreach($ids as $id=>$quantity){
+//             $product= Product::findOrFail($id);
+//             $product['quantity'] = $quantity;
+//             $subTotal += $product['quantity'] * $product->getPrice();
+//             $shipping += $quantity *10;
+//             $total = $subTotal +$shipping;
+//             array_push($products, $product);
+//         }
+//         return view('cart',compact('products','shipping','subTotal','total'));
+//     }
 
     function add_product(Request $request)
     {
@@ -89,4 +90,26 @@ class HomeController extends Controller
         }
         return abort(404);
     }
+
+    function checkOut()
+    {
+        $products = [];
+        $shipping = 0;
+        $subTotal = 0;
+        $total = 0;
+        $ids = session()->get('ids', []);
+        $ids = array_count_values($ids);
+        foreach ($ids as $id => $quantity) {
+            $product = Product::findOrFail($id);
+            $product['quantity'] = $quantity;
+            $subTotal += $product['quantity'] * $product->getPrice();
+            $shipping += $quantity * 10;
+            $total = $subTotal + $shipping;
+            array_push($products, $product);
+        }
+        return view('checkout', compact('products', 'shipping', 'subTotal', 'total'));
+
+
+    }
+
 }

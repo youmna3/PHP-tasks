@@ -25,7 +25,8 @@
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px">
                                         <div class="input-group-btn">
-                                            <button type="button" class="decBtn btn btn-sm btn-primary btn-minus">
+                                            <button type="button" onclick="decQuan({{ $product['id'] }})"
+                                                class="decBtn btn btn-sm btn-primary btn-minus">
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
@@ -33,7 +34,8 @@
                                             class="quantityVal form-control form-control-sm bg-secondary border-0 text-center"
                                             value="{{ $product['quantity'] }}" />
                                         <div class="input-group-btn">
-                                            <button type="button" class="incBtn btn btn-sm btn-primary btn-plus">
+                                            <button type="button" onclick="incQuan({{ $product['id'] }})"
+                                                class="incBtn btn btn-sm btn-primary btn-plus">
                                                 <i class="fa fa-plus"></i>
                                             </button>
                                         </div>
@@ -41,7 +43,8 @@
                                 </td>
                                 <td class="align-middle">${{ $product->getPrice() * $product['quantity'] }}</td>
                                 <td class="align-middle">
-                                    <button class="btn btn-sm btn-danger" type="button">
+                                    <button class="btn btn-sm btn-danger"
+                                        onclick="remove({{ $product['id'] }})"type="button">
                                         <i class="fa fa-times"></i>
                                     </button>
                                 </td>
@@ -87,4 +90,44 @@
         </div>
     </div>
     <!-- Cart End -->
+@endsection
+
+@section('scripts')
+    <script>
+        function incQuan(id) {
+            $.ajax({
+                url: '{{ url('/inc-product') }}',
+                data: {
+                    id: id
+                },
+                success: (data) => {
+                    console.log(data);
+                }
+            })
+        }
+
+        function decQuan(id) {
+            $.ajax({
+                url: '{{ url('/dec-product') }}',
+                data: {
+                    id: id
+                },
+                success: (data) => {
+                    console.log(data);
+                }
+            })
+        }
+
+        function remove(id) {
+            $.ajax({
+                url: '{{ url('/remove-product') }}',
+                data: {
+                    id: id
+                },
+                success: (data) => {
+                    console.log(data);
+                }
+            })
+        }
+    </script>
 @endsection

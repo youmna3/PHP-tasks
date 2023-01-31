@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CartController;
+
 
 
 /*
@@ -22,7 +24,12 @@ use App\Http\Controllers\CategoriesController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/shop', [HomeController::class, 'shop']);
 Route::get('/add-product', [HomeController::class, 'add_product']);
-Route::get('/cart', [HomeController::class, 'cart']);
+Route::get('/cart', [CartController::class, 'cart']);
+Route::get('/inc-product', [CartController::class, 'incQuan']);
+Route::get('/dec-product', [CartController::class, 'decQuan']);
+Route::get('/remove-product', [CartController::class, 'delete']);
+Route::get('/checkout', [HomeController::class, 'checkOut']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
