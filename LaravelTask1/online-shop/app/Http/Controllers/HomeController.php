@@ -91,6 +91,17 @@ class HomeController extends Controller
         return abort(404);
     }
 
+    function addToFavorite(Request $request)
+    {
+        if ($request->has('id')) {
+            $ids = Session::get('favourites', []);
+            array_push($ids, $request->get('id'));
+            Session::put('favourites', $ids);
+            return response()->json('added to favourites');
+        }
+        return abort(404);
+    }
+
     function checkOut()
     {
         $products = [];
@@ -111,5 +122,10 @@ class HomeController extends Controller
 
 
     }
+    function contact()
+    {
+        return view('contact');
+    }
+
 
 }

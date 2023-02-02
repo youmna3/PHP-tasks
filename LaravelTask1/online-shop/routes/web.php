@@ -24,11 +24,13 @@ use App\Http\Controllers\CartController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/shop', [HomeController::class, 'shop']);
 Route::get('/add-product', [HomeController::class, 'add_product']);
+Route::get('/add-favorite', [HomeController::class, 'addToFavorite']);
 Route::get('/cart', [CartController::class, 'cart']);
 Route::get('/inc-product', [CartController::class, 'incQuan']);
 Route::get('/dec-product', [CartController::class, 'decQuan']);
 Route::get('/remove-product', [CartController::class, 'delete']);
 Route::get('/checkout', [HomeController::class, 'checkOut']);
+Route::get('/contact', [HomeController::class, 'contact']);
 
 
 Route::get('/dashboard', function () {

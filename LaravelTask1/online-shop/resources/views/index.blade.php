@@ -133,7 +133,7 @@
                             </div>
                             <div class="flex-fill pl-3">
                                 <h6>{{ $category['name'] }}</h6>
-                                <small class="text-body">{{ $category['product'] }}</small>
+                                <small class="text-body">{{ $category['products']->count() }} Products</small>
                             </div>
                         </div>
                     </a>
@@ -236,7 +236,8 @@
                                     <a class="btn btn-outline-dark btn-square"
                                         onclick="addProductToSession({{ $product['id'] }})"><i
                                             class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href="#"><i
+                                    <a class="btn btn-outline-dark btn-square"
+                                        onclick="addProductFavoriteToSession({{ $product['id'] }})"><i
                                             class="far fa-heart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href="#"><i
                                             class="fa fa-sync-alt"></i></a>

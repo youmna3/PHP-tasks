@@ -14,4 +14,8 @@ class Category extends Model
         'name' => 'required',
         'image' => 'required|mimes:jpg,png,bmp,jpeg|max:2048'
     ];
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
