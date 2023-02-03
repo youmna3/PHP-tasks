@@ -86,7 +86,7 @@ class HomeController extends Controller
             $ids = Session::get('ids', []);
             array_push($ids, $request->get('id'));
             Session::put('ids', $ids);
-            return response()->json('Data addedd successfully');
+            return response()->json(count($ids));
         }
         return abort(404);
     }
@@ -97,7 +97,7 @@ class HomeController extends Controller
             $ids = Session::get('favourites', []);
             array_push($ids, $request->get('id'));
             Session::put('favourites', $ids);
-            return response()->json('added to favourites');
+            return response()->json(count($ids));
         }
         return abort(404);
     }
@@ -121,10 +121,6 @@ class HomeController extends Controller
         return view('checkout', compact('products', 'shipping', 'subTotal', 'total'));
 
 
-    }
-    function contact()
-    {
-        return view('contact');
     }
 
 

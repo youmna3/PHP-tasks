@@ -8,29 +8,38 @@
              <div class="col-lg-7 mb-5">
                  <div class="contact-form bg-light p-30">
                      <div id="success"></div>
-                     <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                     <form method="POST" action="{{ url('/contact') }}">
+                         @csrf
                          <div class="control-group">
-                             <input type="text" class="form-control" id="name" placeholder="Your Name"
-                                 required="required" data-validation-required-message="Please enter your name" />
-                             <p class="help-block text-danger"></p>
+                             <input type="text" class="form-control" name="name" placeholder="Your Name"
+                                 required="required" value="{{ old('name') }}" />
+                             @error('name')
+                                 <p class="help-block text-danger">{{ $message }}</p>
+                             @enderror
                          </div>
                          <div class="control-group">
-                             <input type="email" class="form-control" id="email" placeholder="Your Email"
-                                 required="required" data-validation-required-message="Please enter your email" />
-                             <p class="help-block text-danger"></p>
+                             <input type="email" class="form-control" name="email" placeholder="Your Email"
+                                 required="required" value="{{ old('email') }}" />
+                             @error('email')
+                                 <p class="help-block text-danger">{{ $message }}</p>
+                             @enderror
                          </div>
                          <div class="control-group">
-                             <input type="text" class="form-control" id="subject" placeholder="Subject"
-                                 required="required" data-validation-required-message="Please enter a subject" />
-                             <p class="help-block text-danger"></p>
+                             <input type="text" class="form-control" name="subject" placeholder="Subject"
+                                 required="required" value="{{ old('subject') }}" />
+                             @error('subject')
+                                 <p class="help-block text-danger">{{ $message }}</p>
+                             @enderror
                          </div>
                          <div class="control-group">
-                             <textarea class="form-control" rows="8" id="message" placeholder="Message" required="required"
-                                 data-validation-required-message="Please enter your message"></textarea>
-                             <p class="help-block text-danger"></p>
+                             <textarea class="form-control" rows="8" name="message_text" placeholder="Message" required="required"
+                                 value="{{ old('message_text') }}"></textarea>
+                             @error('message_text')
+                                 <p class="help-block text-danger">{{ $message }}</p>
+                             @enderror
                          </div>
                          <div>
-                             <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send
+                             <button class="btn btn-primary py-2 px-4" type="submit">Send
                                  Message</button>
                          </div>
                      </form>

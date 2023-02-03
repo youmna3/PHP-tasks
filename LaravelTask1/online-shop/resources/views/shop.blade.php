@@ -211,7 +211,7 @@
                     id: id
                 },
                 success: (data) => {
-                    console.log(data);
+                    $('.product_count').html(data);
                 }
             })
         }
@@ -223,7 +223,7 @@
                     id: id
                 },
                 success: (data) => {
-                    console.log(data);
+                    $('.favourit_count').html(data);
                 }
             })
         }

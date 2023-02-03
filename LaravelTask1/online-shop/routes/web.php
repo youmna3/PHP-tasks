@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -30,7 +32,9 @@ Route::get('/inc-product', [CartController::class, 'incQuan']);
 Route::get('/dec-product', [CartController::class, 'decQuan']);
 Route::get('/remove-product', [CartController::class, 'delete']);
 Route::get('/checkout', [HomeController::class, 'checkOut']);
-Route::get('/contact', [HomeController::class, 'contact']);
+Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
+Route::post('/contact', [ContactController::class, 'sendMessage']);
+
 
 
 Route::get('/dashboard', function () {
@@ -50,4 +54,6 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('', [AdminController::class, 'admin']);
     Route::resource('products', ProductsController::class);
     Route::resource('categories', CategoriesController::class);
+    Route::resource('orders', OrdersController::class);
+
 });

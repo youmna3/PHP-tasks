@@ -160,7 +160,8 @@
                                     <a class="btn btn-outline-dark btn-square"
                                         onclick="addProductToSession({{ $product['id'] }})"><i
                                             class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href="#"><i
+                                    <a class="btn btn-outline-dark btn-square"
+                                        onclick="addProductFavoriteToSession({{ $product['id'] }})"><i
                                             class="far fa-heart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href="#"><i
                                             class="fa fa-sync-alt"></i></a>
@@ -313,7 +314,19 @@
                     id: id
                 },
                 success: (data) => {
-                    console.log(data);
+                    $('.product_count').html(data);
+                }
+            })
+        }
+
+        function addProductFavoriteToSession(id) {
+            $.ajax({
+                url: '{{ url('/add-favorite') }}',
+                data: {
+                    id: id
+                },
+                success: (data) => {
+                    $('.favourit_count').html(data);
                 }
             })
         }

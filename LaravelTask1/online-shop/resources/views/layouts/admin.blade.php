@@ -80,6 +80,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ url('admin/orders') }}" class="nav-link">
+                                <i class="nav-icon fa fa-bars"></i>
+                                <p>Orders</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="3" class="nav-link">
                                 <i class="nav-icon fa fa-bars"></i>
                                 <p>Users</p>
