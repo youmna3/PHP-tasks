@@ -41,13 +41,25 @@
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
-                            My Account
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">Sign in</button>
-                            <button class="dropdown-item" type="button">Sign up</button>
-                        </div>
+                        @if (Auth::user())
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle"
+                                data-toggle="dropdown">{{ Auth::user()->name }}</button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <form action="{{ url('logout') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <button class="dropdown-item" type="submit">Logout</button>
+                                </form>
+                            </div>
+                        @else
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+                                My Account
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="{{ url('login') }}"class="dropdown-item" type="button">Sign In</a>
+                                <a href="{{ url('register') }}" class="dropdown-item" type="button" type="button">Sign
+                                    Up</a>
+                            </div>
+                        @endif
                     </div>
                     <div class="btn-group mx-2">
                         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">

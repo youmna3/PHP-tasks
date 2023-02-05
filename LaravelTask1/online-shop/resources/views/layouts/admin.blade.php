@@ -57,8 +57,12 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Youmna Samir</a>
-                        <a href="#" class="d-block">youmna54@gmail.com</a>
+                        @foreach ($users as $user)
+                            @if ($user['is_admin'])
+                                <a href="#" class="d-block">{{ $user['name'] }}</a>
+                                <a href="#" class="d-block">{{ $user['email'] }}</a>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
                 <!-- Sidebar Menu -->

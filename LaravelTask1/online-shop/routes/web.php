@@ -37,6 +37,7 @@ Route::post('/contact', [ContactController::class, 'sendMessage']);
 
 
 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -50,7 +51,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::middleware(['auth'])->prefix('/admin')->group(function () {
+Route::middleware(['auth', 'can:is_admin'])->prefix('/admin')->group(function () {
     Route::get('', [AdminController::class, 'admin']);
     Route::resource('products', ProductsController::class);
     Route::resource('categories', CategoriesController::class);

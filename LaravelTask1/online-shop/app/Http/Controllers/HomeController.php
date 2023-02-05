@@ -6,8 +6,10 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\color;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 
 class HomeController extends Controller
@@ -15,11 +17,12 @@ class HomeController extends Controller
     //
     function index()
     {
-        // all()select all from the database and return data in the form of array 
-        //$categories = Category::all();
-        //dd($categories);
-        //name (used inside the view) and value
-        return view('index')->with(['categories' => Category::all(), 'products' => Product::all()]);
+        $categories = Category::all();
+        $products = Product::all();
+        $users = User::all();
+
+
+        return view('index', compact('categories', 'products', 'users'));
     }
     function shop(Request $request)
     {
