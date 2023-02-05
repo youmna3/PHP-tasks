@@ -9,6 +9,12 @@
                 <th>total</th>
                 <th>EDIT</th>
             </tr>
+
+            {{-- @foreach ($orders as $order)
+                <td>{{ $product['id'] }}</td>
+                <td>{{ $product['name'] }}</td>
+                <td><img src="{{ asset('storage/' . $product->image) }}"width="100px" /></td>
+            @endforeach --}}
         </thead>
         <tbody>
         </tbody>

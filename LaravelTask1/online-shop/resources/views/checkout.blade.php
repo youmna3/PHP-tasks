@@ -2,7 +2,8 @@
 @section('content')
     <!-- Checkout Start -->
     <div class="container-fluid">
-        <div class="row px-xl-5">
+        <form class="row px-xl-5" method="POST" action="{{ url('/checkout') }}">
+            @csrf
             <div class="col-lg-8">
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing
                         Address</span></h5>
@@ -174,11 +175,12 @@
                                 <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
                             </div>
                         </div>
-                        <button class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
+                        <button class="btn btn-block btn-primary font-weight-bold py-3" type="submit">Place
+                            Order</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <!-- Checkout End -->
 @endsection

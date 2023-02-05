@@ -56,21 +56,6 @@ class CartController extends Controller
         }
         return abort(404);
     }
-    /*
-    function remove(Request $request)
-    {
-    if (($request->has('id'))) {
-    $id = $request->get('id');
-    $ids = Session::get('ids', []);
-    //unset($ids[$id]);
-    array_splice($ids, $id, 1);
-    //array_values($ids);
-    Session::put('ids', $ids);
-    return response()->json('removed');
-    }
-    }
-    */
-
 
     function delete(Request $request)
     {
