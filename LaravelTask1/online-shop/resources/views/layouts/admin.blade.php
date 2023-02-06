@@ -57,12 +57,10 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        @foreach ($users as $user)
-                            @if ($user['is_admin'])
-                                <a href="#" class="d-block">{{ $user['name'] }}</a>
-                                <a href="#" class="d-block">{{ $user['email'] }}</a>
-                            @endif
-                        @endforeach
+                        @if (Auth::user())
+                            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                            <a href="#" class="d-block">{{ Auth::user()->email }}</a>
+                        @endif
                     </div>
                 </div>
                 <!-- Sidebar Menu -->
