@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\color;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
@@ -106,11 +108,36 @@ class HomeController extends Controller
 
 
     }
-/*
-function addOrder(){
-$order = new Order;
-}
-*/
+
+    function post_order(Request $request)
+    {
+        $total = 0;
+        $shipping = 0;
+        $subTotal = 0;
+
+        $products = [];
+        $ids = session()->get('ids', []);
+        $ids = array_count_values($ids);
+        foreach ($ids as $id => $quantity) {
+            $product = Product::findOrFail($id);
+            $product['quantity'] = $quantity;
+            $subTotal += $product['quantity'] * $product->getPrice();
+            $shipping += $quantity * 10;
+            $total = $subTotal + $shipping;
+            array_push($products, $product);
+        }
+        $order = new Order;
+        $order->fill($request->post());
+        $order->total = $total;
+        $order->shipping = $shipping;
+        $order->sub_total = $subTotal;
+        $order->user_id = Auth::id();
+        $order->save();
+        return Redirect::back()->with('success', 'Thank you for you Order, Order Number:4523sd45f');
+
+
+    }
+
 
 
 }

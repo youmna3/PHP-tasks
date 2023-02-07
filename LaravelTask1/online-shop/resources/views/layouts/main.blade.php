@@ -161,6 +161,7 @@
                             <a href="{{ url('shop') }}" class="nav-item nav-link">Shop</a>
                             <a href="{{ url('cart') }}" class="nav-item nav-link">Cart</a>
                             <a href="{{ url('checkout') }}" class="nav-item nav-link">Checkout</a>
+                            <a href="{{ url('details') }}" class="nav-item nav-link">Shop Detail</a>
                             <a href="{{ url('contact') }}" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">

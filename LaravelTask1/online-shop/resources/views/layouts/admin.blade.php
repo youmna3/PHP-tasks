@@ -40,7 +40,7 @@
                     <a href="{{ url('admin') }}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="{{ url('/') }}" class="nav-link">Website</a>
                 </li>
             </ul>
         </nav>
@@ -93,13 +93,20 @@
                                 <p>Users</p>
                             </a>
                         </li>
+                        {{-- <li class="nav-item">
+                            <form method="{{ url('/logout') }}" action="POST">
+
+                                <button type="submit"><i class="nav-icon fa fa-bars">Logout</i></button>
+                            </form>
+                        </li> --}}
                         <li class="nav-item">
-                            <a href="3" class="nav-link">
-                                <i class="nav-icon fa fa-bars"></i>
-                                <p>Logout</p>
-                            </a>
+                            <form class="nav-link" action="{{ url('logout') }}" method="POST">
+                                {{ csrf_field() }}
+                                <i class="nav-icon fa fa-bars"><button type="submit">Logout</button></i>
+                            </form>
                         </li>
                     </ul>
+
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DetailsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -32,8 +33,12 @@ Route::get('/inc-product', [CartController::class, 'incQuan']);
 Route::get('/dec-product', [CartController::class, 'decQuan']);
 Route::get('/remove-product', [CartController::class, 'delete']);
 Route::get('/checkout', [HomeController::class, 'checkOut']);
+Route::post('/add_order', [HomeController::class, 'post_order']);
 Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
 Route::post('/contact', [ContactController::class, 'sendMessage']);
+Route::get('/details', [DetailsController::class, 'index']);
+Route::get('/details/{id}', [DetailsController::class, 'index']);
+
 
 
 

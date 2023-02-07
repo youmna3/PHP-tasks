@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Models\Product;
+
 
 
 
@@ -18,21 +19,10 @@ class OrdersController extends Controller
     public function index()
     {
         //
-        $products = [];
-        $shipping = 0;
-        $subTotal = 0;
-        $total = 0;
-        $ids = session()->get('ids', []);
-        $ids = array_count_values($ids);
-        foreach ($ids as $id => $quantity) {
-            $product = Product::findOrFail($id);
-            $product['quantity'] = $quantity;
-            $subTotal += $product['quantity'] * $product->getPrice();
-            $shipping += $quantity * 10;
-            $total = $subTotal + $shipping;
-            array_push($products, $product);
-        }
-        return view('admin.orders.index', compact('product', 'subTotal', 'shipping', 'total'));
+        $orders = Order::paginate(5);
+
+
+        return view('admin.orders.index', compact('orders'));
     }
 
     /**
@@ -65,6 +55,8 @@ class OrdersController extends Controller
     public function show($id)
     {
         //
+        $order = Order::findOrFail($id);
+        return view('admin.orders.show', compact('order'));
     }
 
     /**
