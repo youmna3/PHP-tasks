@@ -20,7 +20,6 @@
                     <td>{{ $order['shipping'] }}</td>
                     <td>{{ $order['total'] }}</td>
                     <td><a href="{{ url('admin/orders/' . $order['id']) }}" class="btn btn-success">Show</a>
-
             </tr>
             @endforeach
         </tbody>
