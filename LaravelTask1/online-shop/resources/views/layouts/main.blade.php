@@ -160,7 +160,11 @@
                             <a href="{{ url('') }}" class="nav-item nav-link active">Home</a>
                             <a href="{{ url('shop') }}" class="nav-item nav-link">Shop</a>
                             <a href="{{ url('cart') }}" class="nav-item nav-link">Cart</a>
-                            <a href="{{ url('checkout') }}" class="nav-item nav-link">Checkout</a>
+                            @if (Auth::user())
+                                <a href="{{ url('checkout') }}" class="nav-item nav-link">Checkout</a>
+                            @else
+                                <a href="{{ url('login') }}" class="nav-item nav-link">Checkout</a>
+                            @endif
                             <a href="{{ url('details') }}" class="nav-item nav-link">Shop Detail</a>
                             <a href="{{ url('contact') }}" class="nav-item nav-link">Contact</a>
                         </div>
@@ -183,6 +187,12 @@
         </div>
     </div>
     <!-- Navbar End -->
+    {{-- @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-block favourit_count">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+        </div>
+    @endif --}}
 
     @yield('content')
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
@@ -79,53 +80,28 @@ class HomeController extends Controller
 
     function addToFavorite(Request $request)
     {
-        if ($request->has('id')) {
-            $ids = Session::get('favourites', []);
+
+        $ids = Session::get('favourites', []);
+        if (!array_search($request->get('id'), $ids)) {
             array_push($ids, $request->get('id'));
             Session::put('favourites', $ids);
             return response()->json(count($ids));
         }
-        return abort(404);
     }
-
     function checkOut()
     {
-        $products = [];
-        $shipping = 0;
-        $subTotal = 0;
-        $total = 0;
-        $ids = session()->get('ids', []);
-        $ids = array_count_values($ids);
-        foreach ($ids as $id => $quantity) {
-            $product = Product::findOrFail($id);
-            $product['quantity'] = $quantity;
-            $subTotal += $product['quantity'] * $product->getPrice();
-            $shipping += $quantity * 10;
-            $total = $subTotal + $shipping;
-            array_push($products, $product);
-        }
+        $products = Cart::cartLines();
+        $subTotal = Cart::subTotal();
+        $shipping = Cart::shipping();
+        $total = Cart::total();
         return view('checkout', compact('products', 'shipping', 'subTotal', 'total'));
-
-
     }
-
     function post_order(Request $request)
     {
-        $total = 0;
-        $shipping = 0;
-        $subTotal = 0;
-
-        $products = [];
-        $ids = session()->get('ids', []);
-        $ids = array_count_values($ids);
-        foreach ($ids as $id => $quantity) {
-            $product = Product::findOrFail($id);
-            $product['quantity'] = $quantity;
-            $subTotal += $product['quantity'] * $product->getPrice();
-            $shipping += $quantity * 10;
-            $total = $subTotal + $shipping;
-            array_push($products, $product);
-        }
+        $products = Cart::cartLines();
+        $subTotal = Cart::subTotal();
+        $shipping = Cart::shipping();
+        $total = Cart::total();
         $order = new Order;
         $order->fill($request->post());
         $order->total = $total;
@@ -133,11 +109,11 @@ class HomeController extends Controller
         $order->sub_total = $subTotal;
         $order->user_id = Auth::id();
         $order->save();
+        Session::forget('ids');
         return Redirect::back()->with('success', 'Thank you for you Order, Order Number:4523sd45f');
 
 
     }
-
 
 
 }

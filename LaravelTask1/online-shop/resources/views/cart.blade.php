@@ -81,9 +81,15 @@
                             <h5>Total</h5>
                             <h5 id="total">${{ $total }}</h5>
                         </div>
-                        <a href="{{ url('checkout') }}" class="btn btn-block btn-primary font-weight-bold my-3 py-3">
-                            Proceed To Checkout
-                        </a>
+                        @if (Auth::user())
+                            <a href="{{ url('checkout') }}" class="btn btn-block btn-primary font-weight-bold my-3 py-3">
+                                Proceed To Checkout
+                            </a>
+                        @else
+                            <a href="{{ url('login') }}" class="btn btn-block btn-primary font-weight-bold my-3 py-3">
+                                Proceed To Checkout
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

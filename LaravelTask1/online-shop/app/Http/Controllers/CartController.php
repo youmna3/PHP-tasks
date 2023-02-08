@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
@@ -12,21 +13,12 @@ class CartController extends Controller
     //
     function cart()
     {
-        $products = [];
-        $shipping = 0;
-        $subTotal = 0;
-        $total = 0;
-        $ids = session()->get('ids', []);
-        $ids = array_count_values($ids);
-        foreach ($ids as $id => $quantity) {
-            $product = Product::findOrFail($id);
-            $product['quantity'] = $quantity;
-            $subTotal += $product['quantity'] * $product->getPrice();
-            $shipping += $quantity * 10;
-            $total = $subTotal + $shipping;
-            array_push($products, $product);
-        }
-        return view('cart', compact('products', 'shipping', 'subTotal', 'total'));
+
+        $products = Cart::cartLines();
+        $subTotal = Cart::subTotal();
+        $shipping = Cart::shipping();
+        $total = Cart::total();
+        return view('cart', compact('products', 'subTotal', 'shipping', 'total'));
     }
     function incQuan(Request $request)
     {
@@ -73,7 +65,5 @@ class CartController extends Controller
         return abort(404);
 
     }
-
-
 
 }
