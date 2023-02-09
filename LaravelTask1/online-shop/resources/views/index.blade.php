@@ -176,14 +176,7 @@
                                     <h5>{{ $product->getPrice() }}</h5>
                                     <h6 class="text-muted ml-2"><del>{{ $product['price'] }}</del></h6>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
-                                </div>
+                                @include('partial_view.stars')
                             </div>
                         </div>
                     </div>
@@ -253,20 +246,14 @@
                                     <h5>{{ $product->getPrice() }}</h5>
                                     <h6 class="text-muted ml-2"><del>{{ $product['price'] }}</del></h6>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
-                                </div>
+                                @include('partial_view.stars')
                             </div>
                         </div>
                     </div>
-                @endif
-            @endforeach
         </div>
+        @endif
+        @endforeach
+    </div>
     </div>
     <!-- Products End -->
 

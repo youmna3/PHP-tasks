@@ -31,14 +31,7 @@
                 <div class="h-100 bg-light p-30">
                     <h3>{{ $product['name'] }}</h3>
                     <div class="d-flex mb-3">
-                        <div class="text-primary mr-2">
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star-half-alt"></small>
-                            <small class="far fa-star"></small>
-                        </div>
-                        <small class="pt-1">(99 Reviews)</small>
+                        @include('partial_view.stars')
                     </div>
                     <h3 class="font-weight-semi-bold mb-4">${{ $product->getPrice() }}</h3>
                     <p class="mb-4">{{ $product['description'] }}</p>
@@ -284,14 +277,7 @@
                                     <h5>${{ $product->getPrice() }}</h5>
                                     <h6 class="text-muted ml-2"><del>{{ $product['price'] }}</del></h6>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
-                                </div>
+                                @include('partial_view.stars')
                             </div>
                         </div>
                     @endforeach
