@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\color;
@@ -109,6 +110,14 @@ class HomeController extends Controller
         $order->sub_total = $subTotal;
         $order->user_id = Auth::id();
         $order->save();
+        foreach ($products as $product) {
+            $order_detail = new OrderDetail;
+            $order_detail->order_id = $order->id;
+            $order_detail->product_id = $product->id;
+            $order_detail->quantity = $product->quantity;
+            $order_detail->price = $product->getPrice();
+            $order_detail->save();
+        }
         Session::forget('ids');
         return Redirect::back()->with('success', 'Thank you for you Order, Order Number:4523sd45f');
 

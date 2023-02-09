@@ -4,38 +4,37 @@
         <thead class="thead-dark">
             <tr>
                 <th>Id</th>
+                <th>Order</th>
                 <th>Product</th>
-                <th>order</th>
                 <th>quantity</th>
                 <th>price</th>
             </tr>
         </thead>
-        {{-- <tbody>
-        <tr>
-            @foreach ($orders as $order)
-                <td>{{ $order['id'] }}</td>
-                <td>{{ $order['user_id'] }}</td>
-                <td>{{ $order['sub_total'] }}</td>
-                <td>{{ $order['shipping'] }}</td>
-                <td>{{ $order['total'] }}</td>
-                <td><a href="{{ url('admin/orders/' . $order['id']) }}" class="btn btn-success">Show</a>
+        <tbody>
+            @foreach ($orderDetails as $orderDetail)
+                <tr>
+                    <td>{{ $orderDetail['id'] }}</td>
+                    <td>#{{ $orderDetail['order_id'] }}</td>
+                    <td>#{{ $orderDetail['product_id'] }}</td>
+                    <td>{{ $orderDetail['quantity'] }}</td>
+                    <td>${{ $orderDetail['price'] }}</td>
 
-        </tr>
-        @endforeach
-    </tbody> --}}
+                </tr>
+            @endforeach
+        </tbody>
     </table>
     <table class="table table-bordered table-striped text-center ">
         <thead class="thead-dark">
             <tr>
-                <th>name</th>
-                <th>email</th>
-                <th>mobile</th>
-                <th>adress1</th>
-                <th>adress2</th>
-                <th>country</th>
-                <th>city</th>
-                <th>state</th>
-                <th>zip code</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Adress1</th>
+                <th>Adress2</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
             </tr>
         </thead>
         <tbody>

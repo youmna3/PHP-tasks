@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -19,7 +20,7 @@ class OrdersController extends Controller
     public function index()
     {
         //
-        $orders = Order::paginate(5);
+        $orders = Order::paginate(10);
 
 
         return view('admin.orders.index', compact('orders'));
@@ -56,7 +57,8 @@ class OrdersController extends Controller
     {
         //
         $order = Order::findOrFail($id);
-        return view('admin.orders.show', compact('order'));
+        $orderDetails = OrderDetail::whereBelongsTo($order)->get();
+        return view('admin.orders.show', compact('order', 'orderDetails'));
     }
 
     /**
