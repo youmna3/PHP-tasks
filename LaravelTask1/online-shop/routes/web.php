@@ -38,6 +38,8 @@ Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
 Route::post('/contact', [ContactController::class, 'sendMessage']);
 Route::get('/details', [DetailsController::class, 'index']);
 Route::get('/details/{id}', [DetailsController::class, 'index']);
+Route::post('/details/{id}', [DetailsController::class, 'postReview']);
+
 
 
 
