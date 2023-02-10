@@ -27,7 +27,7 @@ class DetailsController extends Controller
 
         $review->user_id = auth()->user()->id;
         $review->product_id = $request->id;
-        $review->rate = 3;
+        //$review->rate = 3;
         $review->save();
         $product = Product::Find($id);
         $product['rating_count'] = $product['rating_count'] + 1;

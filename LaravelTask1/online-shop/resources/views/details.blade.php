@@ -208,28 +208,30 @@
                                     @endforeach
                                 </div>
                                 <div class="col-md-6">
-                                    <h4 class="mb-4">Leave a review</h4>
-                                    <small>Your email address will not be published. Required fields are marked *</small>
-                                    <form method="POST" action="{{ url('/details/' . ($id = $product->id)) }}">
-                                        @csrf
-                                        <div class="d-flex my-3">
-                                            <label for="ratinginput" class="control-label">rating product:</label>
-                                            <input id="ratinginput" name="rate" class="rating rating-loading"
-                                                data-min="0" data-max="5" data-step="0.5">
-                                            <div class="text-primary">
-                                                <i class="far fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                                <i class="far fa-star"></i>
+                                    @if (Auth::user())
+                                        <h4 class="mb-4">Leave a review</h4>
+                                        <small>Your email address will not be published. Required fields are marked
+                                            *</small>
+                                        <form method="POST" action="{{ url('/details/' . ($id = $product->id)) }}">
+                                            @csrf
+                                            <div class="d-flex my-3">
+                                                <label for="ratinginput" class="control-label">rating product:</label>
+                                                <input id="ratinginput" name="rate" class="rating rating-loading"
+                                                    data-min="0" data-max="5" data-step="0.5">
+                                                <div class="text-primary">
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label for="message">Your Review *</label>
-                                            <textarea id="message" name="review" cols="30" rows="5" class="form-control"></textarea>
-                                        </div>
-                                        {{-- <div class="form-group">
+                                            <div class="form-group">
+                                                <label for="message">Your Review *</label>
+                                                <textarea id="message" name="review" cols="30" rows="5" class="form-control"></textarea>
+                                            </div>
+                                            {{-- <div class="form-group">
                                             <label for="name">Your Name *</label>
                                             <input type="text" class="form-control" id="name">
                                         </div>
@@ -237,10 +239,12 @@
                                             <label for="email">Your Email *</label>
                                             <input type="email" class="form-control" id="email">
                                         </div> --}}
-                                        <div class="form-group mb-0">
-                                            <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
-                                        </div>
-                                    </form>
+                                            <div class="form-group mb-0">
+                                                <input type="submit" value="Leave Your Review"
+                                                    class="btn btn-primary px-3">
+                                            </div>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
